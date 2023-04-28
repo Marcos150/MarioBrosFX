@@ -1,0 +1,3 @@
+Mario and luigi sprites are 16x32 pixels
+Enemy sprites are 16x16
+Mini character icon is 16x6
