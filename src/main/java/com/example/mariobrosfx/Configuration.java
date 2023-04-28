@@ -9,6 +9,7 @@ public class Configuration
     public int FRAME_ANIMATION_RATE = 10;
     public int INITIAL_LIVES = 3;
     public int POW_BLOCK_USAGES = 3;
+    public int INITIAL_ENEMY_SPEED = 5;
     public int GRAVITY = 8;
     public int JUMP_FORCE = 2;
     //TODO fix secret code
