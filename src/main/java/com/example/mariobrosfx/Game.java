@@ -2,12 +2,14 @@ package com.example.mariobrosfx;
 
 import javafx.scene.input.KeyEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 
 public class Game
 {
     private Character player;
-    private Enemy[] enemies;
+    private List<Enemy> enemies;
     private PowBlock pow;
     private Platform[] platforms;
     private Timer timer;
