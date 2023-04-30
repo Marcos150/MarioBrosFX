@@ -14,6 +14,11 @@ public abstract class AnimatedSprite extends Sprite
     protected boolean left;
     protected boolean right;
 
+    public AnimatedSprite(int width, int height)
+    {
+        super(width, height);
+    }
+
     public void animate(int movement)
     {
 
