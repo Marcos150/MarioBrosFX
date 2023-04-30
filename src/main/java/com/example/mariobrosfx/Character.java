@@ -9,9 +9,9 @@ public class Character extends Sprite
 {
     private int lives;
     private int points;
-    public static final int CHARACTER_WIDTH = 60;
-    public static final int CHARACTER_HEIGHT = 96;
-    private static final String IMAGE_PATH = "com/example/mariobrosfx/Sprites/sprites.png";
+    public static final int CHARACTER_WIDTH = 45;
+    public static final int CHARACTER_HEIGHT = 60;
+    private static final String IMAGE_PATH = "src/main/resources/com/example/mariobrosfx/Sprites/sprites.png";
     public static final int LEFT = 0;
     public static final int RIGHT = 1;
     private boolean isOnPlatform;
@@ -31,7 +31,7 @@ public class Character extends Sprite
         lives = Configuration.INITIAL_LIVES;
         isOnPlatform = false;
         canJump = true;
-        spriteX = 18;
+        spriteX = 0;
         spriteY = 0;
     }
 
