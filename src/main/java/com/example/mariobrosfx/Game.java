@@ -77,7 +77,8 @@ public class Game
         canvas.setWidth(Configuration.SCREEN_WIDTH);
         canvas.setHeight(Configuration.SCREEN_HEIGHT);
         gc = canvas.getGraphicsContext2D();
-        lblGame.setVisible(false);
+        lblGame.setTextFill(Color.WHITE);
+        lblGame.setText("Refresh map");
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
         activeKeys = new HashSet<>();
