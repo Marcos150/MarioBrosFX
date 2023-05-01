@@ -74,6 +74,8 @@ public class Game
     public void lblMouseClick()
     {
         activeKeys.clear();
+        canvas.setWidth(Configuration.SCREEN_WIDTH);
+        canvas.setHeight(Configuration.SCREEN_HEIGHT);
         gc = canvas.getGraphicsContext2D();
         lblGame.setVisible(false);
         gc.setFill(Color.BLACK);

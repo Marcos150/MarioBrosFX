@@ -17,6 +17,9 @@ public class Main extends Application
         scene = fxmlLoader.load();
         stage.setTitle("Mario Bros");
         stage.setScene(scene);
+        stage.setWidth(Configuration.SCREEN_WIDTH);
+        //For some reason, this method sizes the screen with -28 pixels than specified
+        stage.setHeight(Configuration.SCREEN_HEIGHT + 28);
         stage.show();
     }
 

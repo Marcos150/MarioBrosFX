@@ -3,8 +3,8 @@ package com.example.mariobrosfx;
 public class Configuration
 {
     //TODO find a proper screen size
-    public static final int SCREEN_WIDTH = 816;
-    public static final int SCREEN_HEIGHT = 816;
+    public static final int SCREEN_WIDTH = 640;
+    public static final int SCREEN_HEIGHT = 600;
     //TODO change this when I have the sprites sheets
     public static final int FRAME_ANIMATION_RATE = 10;
     public static final int INITIAL_LIVES = 3;
