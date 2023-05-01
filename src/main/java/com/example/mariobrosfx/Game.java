@@ -10,6 +10,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Game
 {
@@ -27,7 +30,7 @@ public class Game
     private Character player;
     private List<Enemy> enemies;
     private PowBlock pow;
-    private final int platformsNumber = 6;
+    private final int platformsNumber = 100;
     private Platform[] platforms;
     private boolean secret;
     private int currectGravity;
@@ -156,12 +159,34 @@ public class Game
 
     public void generatePlatforms()
     {
-        platforms[0].moveTo(0, 200);
-        platforms[1].moveTo(128, 200);
-        platforms[2].moveTo(200, 300);
-        platforms[3].moveTo(318, 300);
-        platforms[4].moveTo(400, 200);
-        platforms[5].moveTo(518, 200);
+        int counter = 0;
+        try
+        {
+            File mapFile = new File("src/main/resources/map.txt");
+            Scanner myReader = new Scanner(mapFile);
+            int y = 0;
+            while (myReader.hasNextLine())
+            {
+                String row = myReader.nextLine();
+                int x = 0;
+                for (char c : row.toCharArray())
+                {
+                    if (c == 'x')
+                    {
+                        platforms[counter].moveTo(x, y);
+                        //gc.drawImage(image, 0, 0, 128, 16, x, y, 128, 16);
+                        counter++;
+                    }
+                    x += 128;
+                }
+                y += Configuration.SCREEN_HEIGHT/Configuration.MAP_ROWS - 1; //-1 so that the last line is barely visible
+            }
+            myReader.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void hitPOW()
