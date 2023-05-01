@@ -9,8 +9,8 @@ public class Character extends Sprite
 {
     private int lives;
     private int points;
-    public static final int CHARACTER_WIDTH = 45;
-    public static final int CHARACTER_HEIGHT = 60;
+    public static final int CHARACTER_WIDTH = 16;
+    public static final int CHARACTER_HEIGHT = 32;
     private static final String IMAGE_PATH = "assets/sprites/sprites.png";
     public static final int LEFT = 0;
     public static final int RIGHT = 1;
@@ -31,8 +31,8 @@ public class Character extends Sprite
         lives = Configuration.INITIAL_LIVES;
         isOnPlatform = false;
         canJump = true;
-        spriteX = 0;
-        spriteY = 0;
+        spriteX = 1;
+        spriteY = 1;
     }
 
     public void move(int movement)
