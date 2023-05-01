@@ -119,7 +119,7 @@ public class Game
         }
         if (shouldMove)
             player.moveTo(player.getX(), player.getY() + currectGravity);
-        if (currectGravity < Configuration.MAX_GRAVITY)
+        if (currectGravity < Configuration.MAX_GRAVITY && !player.isOnPlatform())
             currectGravity += Configuration.GRAVITY;
         drawDebug(shouldMove);
         if (activeKeys.contains(KeyCode.LEFT))
