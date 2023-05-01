@@ -11,7 +11,7 @@ public class Character extends Sprite
     private int points;
     public static final int CHARACTER_WIDTH = 45;
     public static final int CHARACTER_HEIGHT = 60;
-    private static final String IMAGE_PATH = "src/main/resources/com/example/mariobrosfx/Sprites/sprites.png";
+    private static final String IMAGE_PATH = "assets/sprites/sprites.png";
     public static final int LEFT = 0;
     public static final int RIGHT = 1;
     private boolean isOnPlatform;

@@ -165,7 +165,7 @@ public class Game
         int counter = 0;
         try
         {
-            File mapFile = new File("src/main/resources/map.txt");
+            File mapFile = new File("assets/map.txt");
             Scanner myReader = new Scanner(mapFile);
             int y = 0;
             while (myReader.hasNextLine())
