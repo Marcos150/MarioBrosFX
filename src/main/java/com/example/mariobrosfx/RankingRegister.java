@@ -1,10 +1,10 @@
 package com.example.mariobrosfx;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 public class RankingRegister
 {
     private int points;
     private String name;
-    private Calendar date;
+    private LocalDateTime date;
 }
