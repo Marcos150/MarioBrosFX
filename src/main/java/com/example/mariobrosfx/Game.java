@@ -98,6 +98,7 @@ public class Game
                 {
                     player.setOnPlatform(true);
                     player.setCanJump(true);
+                    player.y = s2.getY() - 31;
                 }
                 else
                     player.setOnPlatform(false);
@@ -177,7 +178,6 @@ public class Game
                     if (c == 'x')
                     {
                         platforms[counter].moveTo(x, y);
-                        //gc.drawImage(image, 0, 0, 128, 16, x, y, 128, 16);
                         counter++;
                     }
                     x += 128;
