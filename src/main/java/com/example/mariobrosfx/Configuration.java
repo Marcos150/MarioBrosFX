@@ -11,6 +11,7 @@ public class Configuration
     public static final int POW_BLOCK_USAGES = 3;
     public static final int INITIAL_ENEMY_SPEED = 5;
     public static final int GRAVITY = 1;
+    public static final int CHARACTER_SPEED = 5;
     public static final int MAX_GRAVITY = 15;
     public static final int JUMP_FORCE = -15;
     public static final int MAP_ROWS = 5; // Number of row in txt map -1

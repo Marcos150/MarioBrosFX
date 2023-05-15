@@ -39,9 +39,9 @@ public class Character extends Sprite
     {
         int newX = x;
         if (movement == LEFT)
-            newX -= 2;
+            newX -= Configuration.CHARACTER_SPEED;
         if (movement == RIGHT)
-            newX += 2;
+            newX += Configuration.CHARACTER_SPEED;
         moveTo(newX, y);
     }
 

@@ -38,10 +38,15 @@ public class Game
     private Set<KeyCode> releasedKeys;
     private GraphicsContext gc;
     private AnimationTimer tm = new AnimationTimer() {
+        private long lastUpdate = 0 ;
         @Override
-        public void handle(long timestamp)
+        public void handle(long now)
         {
-            draw();
+            if (now - lastUpdate >= 30_000_000)
+            {
+                draw();
+                lastUpdate = now;
+            }
         }
     };
 
