@@ -12,5 +12,6 @@
          <Label fx:id="lblGame" layoutX="200.0" layoutY="200.0" onMouseClicked="#lblMouseClick" text="Start" />
          <Label fx:id="lblOnPlatform" layoutX="198.0" layoutY="140.0" text="Label" textFill="WHITE" />
          <Label fx:id="lblplayer" layoutX="198.0" layoutY="167.0" text="Label" textFill="WHITE" />
+         <Label fx:id="lblPoints" layoutX="14.0" layoutY="14.0" text="Label" textFill="WHITE" />
       </children></AnchorPane>
 </Scene>

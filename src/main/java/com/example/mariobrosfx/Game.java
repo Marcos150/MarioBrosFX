@@ -17,6 +17,8 @@ import java.util.Scanner;
 public class Game
 {
     @FXML
+    private Label lblPoints;
+    @FXML
     private Label lblOnPlatform;
     @FXML
     private Label lblplayer;
@@ -27,6 +29,8 @@ public class Game
 
     private Character player;
     private List<Enemy> enemies;
+    private Coin coin;
+    private List<Coin> coins;
     private PowBlock pow;
     private Platform[] platforms;
     private boolean secret;
@@ -53,10 +57,14 @@ public class Game
         canvas = new Canvas();
         //5 is the maximum number of platforms for row
         platforms = new Platform[Configuration.MAP_ROWS * 5];
+        player = new Character();
+        coin = new Coin();
+        coin.moveTo(310, 180);
+        coins = new ArrayList<Coin>();
+        coins.add(coin);
 
         try
         {
-            player = new Character();
             for (int i = 0; i < Configuration.MAP_ROWS * 5; i++)
             {
                 platforms[i] = new Platform();
@@ -112,7 +120,13 @@ public class Game
         {
             platform.draw(gc);
         }
+        for (Coin c : coins)
+        {
+            if (!c.isCollected())
+                c.draw(gc);
+        }
         player.draw(gc);
+        updateHUD();
     }
 
     public void drawDebug()
@@ -154,6 +168,7 @@ public class Game
 
     public void checkCollision()
     {
+        //Platforms
         if (player.getCurrentPlatform() == null)
         {
             player.setCanFall(true);
@@ -171,6 +186,16 @@ public class Game
             if (!player.collidesWith((player.getCurrentPlatform())))
                 player.setCurrentPlatform(null);
         }
+
+        //Coins
+        for (Coin c : coins)
+        {
+            if (player.collidesWith(c) && !c.isCollected())
+            {
+                c.setCollected(true);
+                player.setPoints(player.getPoints() + Configuration.COIN_POINTS);
+            }
+        }
     }
 
     public void hitPOW()
@@ -185,7 +210,7 @@ public class Game
 
     public void updateHUD()
     {
-
+        lblPoints.setText("Points: " + player.getPoints());
     }
 
     public void onKeyPressed(KeyEvent e)

@@ -35,6 +35,7 @@ public class Character extends AnimatedSprite
         lives = Configuration.INITIAL_LIVES;
         canJump = true;
         currentGravity = 0;
+        points = 0;
         currentPlatform = null;
 
         spriteX = 1;
@@ -107,6 +108,16 @@ public class Character extends AnimatedSprite
             canFall = false;
             return 1;
         }
+    }
+
+    public void setPoints(int points)
+    {
+        this.points = points;
+    }
+
+    public int getPoints()
+    {
+        return points;
     }
 
     public void setCanFall(boolean canFall)
