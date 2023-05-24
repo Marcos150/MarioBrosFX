@@ -17,8 +17,6 @@ import java.util.Scanner;
 public class Game
 {
     @FXML
-    private Label lblCanGo;
-    @FXML
     private Label lblOnPlatform;
     @FXML
     private Label lblplayer;
@@ -30,10 +28,8 @@ public class Game
     private Character player;
     private List<Enemy> enemies;
     private PowBlock pow;
-    private final int platformsNumber = 100;
     private Platform[] platforms;
     private boolean secret;
-    private int currectGravity;
     private Set<KeyCode> activeKeys;
     private Set<KeyCode> releasedKeys;
     private GraphicsContext gc;
@@ -52,16 +48,16 @@ public class Game
 
     public Game()
     {
-        currectGravity = 0;
         activeKeys = new HashSet<KeyCode>();
         releasedKeys = new HashSet<KeyCode>();
         canvas = new Canvas();
-        platforms = new Platform[platformsNumber];
+        //5 is the maximum number of platforms for row
+        platforms = new Platform[Configuration.MAP_ROWS * 5];
 
         try
         {
             player = new Character();
-            for (int i = 0; i < platformsNumber; i++)
+            for (int i = 0; i < Configuration.MAP_ROWS * 5; i++)
             {
                 platforms[i] = new Platform();
             }
@@ -93,49 +89,11 @@ public class Game
         generatePlatforms();
     }
 
-    public boolean isColliding(Sprite s1, Platform s2)
-    {
-        if (s1.collidesWith(s2))
-        {
-            if (s1 instanceof Character)
-            {
-                if (player.getY() < s2.getY())
-                {
-                    player.setOnPlatform(true);
-                    player.setCanJump(true);
-                    player.y = s2.getY() - 31;
-                }
-                else
-                    player.setOnPlatform(false);
-            }
-            return true;
-        }
-        player.setOnPlatform(false);
-        return false;
-    }
-
     public void draw()
     {
-        boolean shouldMove = true;
-        for (Platform platform : platforms)
-        {
-            if (shouldMove)
-            {
-                if (isColliding(player, platform)
-                       && !(player.isOnPlatform() && currectGravity < 0)
-                        && !(!player.isOnPlatform() && currectGravity > 0))
-                {
-                    shouldMove = false;
-                }
-            }
-        }
-        if (shouldMove)
-            player.moveTo(player.getX(), player.getY() + currectGravity);
-        if (currectGravity < Configuration.MAX_GRAVITY && !player.isOnPlatform())
-            currectGravity += Configuration.GRAVITY;
-        if (player.isOnPlatform())
-            currectGravity = 0;
-        drawDebug(shouldMove);
+        checkCollision();
+        player.checkGravity();
+        drawDebug();
         if (activeKeys.contains(KeyCode.LEFT))
         {
             player.move(Character.LEFT);
@@ -146,11 +104,7 @@ public class Game
         }
         if (activeKeys.contains(KeyCode.UP))
         {
-            if (player.canJump())
-            {
-                currectGravity = Configuration.JUMP_FORCE;
-                player.setCanJump(false);
-            }
+            player.jump();
         }
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
@@ -161,11 +115,10 @@ public class Game
         player.draw(gc);
     }
 
-    public void drawDebug(boolean shouldFall)
+    public void drawDebug()
     {
         lblplayer.setText(player.getX() + " " + player.getY());
-        lblOnPlatform.setText("Is on platform= " + player.isOnPlatform());
-        lblCanGo.setText("Can advance: " + shouldFall);
+        lblOnPlatform.setText("Current platform= " + player.getCurrentPlatform());
     }
 
     public void generatePlatforms()
@@ -199,17 +152,33 @@ public class Game
         }
     }
 
+    public void checkCollision()
+    {
+        if (player.getCurrentPlatform() == null)
+        {
+            player.setCanFall(true);
+            for (Platform p : platforms)
+            {
+                if (player.collidesWith(p))
+                {
+                    player.checkCollisionType(p);
+                }
+            }
+        }
+        //Checks if player is still on the platform
+        else
+        {
+            if (!player.collidesWith((player.getCurrentPlatform())))
+                player.setCurrentPlatform(null);
+        }
+    }
+
     public void hitPOW()
     {
 
     }
 
     public void generateEnemy()
-    {
-
-    }
-
-    public void gameTimerTick()
     {
 
     }
