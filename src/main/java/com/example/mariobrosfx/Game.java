@@ -28,9 +28,7 @@ public class Game
     private Label lblGame;
 
     private Character player;
-    private List<Enemy> enemies;
     private List<Coin> coins;
-    private PowBlock pow;
     private Platform[] platforms;
     private boolean secret;
     private Set<KeyCode> activeKeys;
@@ -56,8 +54,8 @@ public class Game
         canvas = new Canvas();
         //5 is the maximum number of platforms for row
         platforms = new Platform[Configuration.MAP_ROWS * 5];
+        coins = new ArrayList<>();
         player = new Character();
-        generateCoins();
 
         try
         {
@@ -167,10 +165,36 @@ public class Game
 
     public void generateCoins()
     {
-        Coin coin = new Coin();
-        coin.moveTo(310, 180);
-        coins = new ArrayList<Coin>();
-        coins.add(coin);
+        coins = new ArrayList<>();
+        try
+        {
+            File coinFile = new File("src/main/resources/com/example/mariobrosfx/coins.txt");
+            Scanner myReader = new Scanner(coinFile);
+            int y = 40;
+
+            while (myReader.hasNextLine())
+            {
+                String row = myReader.nextLine();
+                int x = 0;
+
+                for (char c : row.toCharArray())
+                {
+                    if (c == 'X')
+                    {
+                        Coin coin = new Coin();
+                        coin.moveTo(x, y);
+                        coins.add(coin);
+                    }
+                    x += 16;
+                }
+                y += Configuration.SCREEN_HEIGHT/Configuration.MAP_ROWS;
+            }
+            myReader.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void checkCollision()
