@@ -19,12 +19,12 @@ public class Main extends Application
         stage.setScene(scene);
         stage.setWidth(Configuration.SCREEN_WIDTH);
         //For some reason, this method sizes the screen with
-        //-28 pixels than specified on Mac an -32 on Windows
+        //-28 pixels than specified on Mac an -35 on Windows
         String os = System.getProperty("os.name");
         if (os.startsWith("Mac"))
             stage.setHeight(Configuration.SCREEN_HEIGHT + 28);
         if (os.startsWith("Windows"))
-            stage.setHeight(Configuration.SCREEN_HEIGHT + 32);
+            stage.setHeight(Configuration.SCREEN_HEIGHT + 35);
 
         stage.show();
     }
