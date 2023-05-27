@@ -194,6 +194,12 @@ public class Game
                 player.setCurrentPlatform(null);
         }
 
+        //Checks if player has reached a screen border and takes it to the other
+        if (player.getX() >= Configuration.SCREEN_WIDTH - 15)
+            player.moveTo(1, player.getY());
+        else if (player.getX() <= 0)
+            player.moveTo(Configuration.SCREEN_WIDTH - 16, player.getY());
+
         //Coins
         for (Coin c : coins)
         {
