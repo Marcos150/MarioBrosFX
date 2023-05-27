@@ -17,6 +17,8 @@ import java.util.Scanner;
 public class Game
 {
     @FXML
+    private Label lblTime;
+    @FXML
     private Label lblPoints;
     @FXML
     private Label lblOnPlatform;
@@ -34,6 +36,7 @@ public class Game
     private Set<KeyCode> activeKeys;
     private Set<KeyCode> releasedKeys;
     private GraphicsContext gc;
+    private int time;
     private AnimationTimer tm = new AnimationTimer() {
         private long lastUpdate = 0 ;
         @Override
@@ -41,6 +44,7 @@ public class Game
         {
             if (now - lastUpdate >= 30_000_000)
             {
+                time++;
                 draw();
                 lastUpdate = now;
             }
@@ -91,6 +95,7 @@ public class Game
                 Configuration.CHARACTER_INITIAL_COORDINATES[1]);
         generatePlatforms();
         generateCoins();
+        time = 0;
     }
 
     public void draw()
@@ -238,6 +243,7 @@ public class Game
     public void updateHUD()
     {
         lblPoints.setText("Points: " + player.getPoints());
+        lblTime.setText("Time: " + time);
     }
 
     public void onKeyPressed(KeyEvent e)
