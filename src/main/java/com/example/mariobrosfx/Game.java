@@ -53,49 +53,36 @@ public class Game
 
     public Game()
     {
-        activeKeys = new HashSet<KeyCode>();
-        releasedKeys = new HashSet<KeyCode>();
         canvas = new Canvas();
-        //5 is the maximum number of platforms for row
-        platforms = new Platform[Configuration.MAP_ROWS * 5];
-        coins = new ArrayList<>();
-        player = new Character();
-
-        try
-        {
-            for (int i = 0; i < Configuration.MAP_ROWS * 5; i++)
-            {
-                platforms[i] = new Platform();
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        activeKeys.clear();
-        gc = canvas.getGraphicsContext2D();
-        tm.start();
     }
 
     public void lblMouseClick()
     {
+        activeKeys = new HashSet<KeyCode>();
+        releasedKeys = new HashSet<KeyCode>();
         activeKeys.clear();
         canvas.setWidth(Configuration.SCREEN_WIDTH);
         canvas.setHeight(Configuration.SCREEN_HEIGHT);
         gc = canvas.getGraphicsContext2D();
         lblGame.setTextFill(Color.WHITE);
+        lblplayer.setTextFill(Color.WHITE);
         lblGame.setText("Refresh map");
         gc.setFill(Color.BLACK);
-        gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
-        activeKeys = new HashSet<>();
-        releasedKeys = new HashSet<>();
 
+        player = new Character();
+        coins = new ArrayList<>();
+        //5 is the maximum number of platforms for row
+        platforms = new Platform[Configuration.MAP_ROWS * 5];
+        for (int i = 0; i < Configuration.MAP_ROWS * 5; i++)
+        {
+            platforms[i] = new Platform();
+        }
         player.moveTo(Configuration.CHARACTER_INITIAL_COORDINATES[0],
                 Configuration.CHARACTER_INITIAL_COORDINATES[1]);
         generatePlatforms();
         generateCoins();
         time = 0;
+        tm.start();
     }
 
     public void draw()
@@ -104,19 +91,14 @@ public class Game
         player.checkGravity();
         drawDebug();
         manageKeys();
-        gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
         for (Platform platform : platforms)
         {
             platform.draw(gc);
         }
-        for (Coin c : coins)
-        {
-            if (!c.isCollected())
-                c.draw(gc);
-        }
         player.draw(gc);
         updateHUD();
+        checkCoinsAndWin();
     }
 
     public void drawDebug()
@@ -135,6 +117,29 @@ public class Game
             player.setStillSprite();
         if (activeKeys.contains(KeyCode.UP))
             player.jump();
+    }
+
+    public void checkCoinsAndWin()
+    {
+        boolean win = true;
+        for (Coin c : coins)
+        {
+            if (!c.isCollected())
+            {
+                c.draw(gc);
+                win = false;
+            }
+        }
+        if (win && lblGame.getText().equals("Refresh map")) //If game has started
+        {
+            tm.stop();
+            lblGame.setTextFill(Color.BLACK);
+            lblplayer.setTextFill(Color.BLACK);
+            lblplayer.setText("Final time: " + time);
+            lblGame.setText("Play again");
+            gc.setFill(Color.WHITE);
+            gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
+        }
     }
 
     public void generatePlatforms()
