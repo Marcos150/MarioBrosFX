@@ -29,7 +29,6 @@ public class Game
 
     private Character player;
     private List<Enemy> enemies;
-    private Coin coin;
     private List<Coin> coins;
     private PowBlock pow;
     private Platform[] platforms;
@@ -58,10 +57,7 @@ public class Game
         //5 is the maximum number of platforms for row
         platforms = new Platform[Configuration.MAP_ROWS * 5];
         player = new Character();
-        coin = new Coin();
-        coin.moveTo(310, 180);
-        coins = new ArrayList<Coin>();
-        coins.add(coin);
+        generateCoins();
 
         try
         {
@@ -93,8 +89,10 @@ public class Game
         activeKeys = new HashSet<>();
         releasedKeys = new HashSet<>();
 
-        player.moveTo(0, 0);
+        player.moveTo(Configuration.CHARACTER_INITIAL_COORDINATES[0],
+                Configuration.CHARACTER_INITIAL_COORDINATES[1]);
         generatePlatforms();
+        generateCoins();
     }
 
     public void draw()
@@ -102,18 +100,7 @@ public class Game
         checkCollision();
         player.checkGravity();
         drawDebug();
-        if (activeKeys.contains(KeyCode.LEFT))
-        {
-            player.move(Character.LEFT);
-        }
-        if (activeKeys.contains(KeyCode.RIGHT))
-        {
-            player.move(Character.RIGHT);
-        }
-        if (activeKeys.contains(KeyCode.UP))
-        {
-            player.jump();
-        }
+        manageKeys();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
         for (Platform platform : platforms)
@@ -133,6 +120,18 @@ public class Game
     {
         lblplayer.setText(player.getX() + " " + player.getY());
         lblOnPlatform.setText("Current platform= " + player.getCurrentPlatform());
+    }
+
+    public void manageKeys()
+    {
+        if (activeKeys.contains(KeyCode.LEFT) && !activeKeys.contains(KeyCode.RIGHT))
+            player.move(Character.LEFT);
+        else if (activeKeys.contains(KeyCode.RIGHT) && !activeKeys.contains(KeyCode.LEFT))
+            player.move(Character.RIGHT);
+        else
+            player.setStillSprite();
+        if (activeKeys.contains(KeyCode.UP))
+            player.jump();
     }
 
     public void generatePlatforms()
@@ -166,6 +165,14 @@ public class Game
         }
     }
 
+    public void generateCoins()
+    {
+        Coin coin = new Coin();
+        coin.moveTo(310, 180);
+        coins = new ArrayList<Coin>();
+        coins.add(coin);
+    }
+
     public void checkCollision()
     {
         //Platforms
@@ -196,16 +203,6 @@ public class Game
                 player.setPoints(player.getPoints() + Configuration.COIN_POINTS);
             }
         }
-    }
-
-    public void hitPOW()
-    {
-
-    }
-
-    public void generateEnemy()
-    {
-
     }
 
     public void updateHUD()
