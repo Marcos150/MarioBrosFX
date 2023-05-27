@@ -18,8 +18,14 @@ public class Main extends Application
         stage.setTitle("Mario Bros");
         stage.setScene(scene);
         stage.setWidth(Configuration.SCREEN_WIDTH);
-        //For some reason, this method sizes the screen with -28 pixels than specified
-        stage.setHeight(Configuration.SCREEN_HEIGHT + 28);
+        //For some reason, this method sizes the screen with
+        //-28 pixels than specified on Mac an -32 on Windows
+        String os = System.getProperty("os.name");
+        if (os.startsWith("Mac"))
+            stage.setHeight(Configuration.SCREEN_HEIGHT + 28);
+        if (os.startsWith("Windows"))
+            stage.setHeight(Configuration.SCREEN_HEIGHT + 32);
+
         stage.show();
     }
 
