@@ -5,6 +5,9 @@ import javafx.scene.image.Image;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Class that defines a platform where the character can stand
+ */
 public class Platform extends Sprite
 {
     public static final int PLATFORM_WIDTH = 128;
@@ -12,6 +15,9 @@ public class Platform extends Sprite
 
     private static final String IMAGE_PATH = "src/main/resources/com/example/mariobrosfx/sprites/platforms_sprite.png";
 
+    /**
+     * Constructor of platform class
+     */
     public Platform()
     {
         super(PLATFORM_WIDTH, PLATFORM_HEIGHT);

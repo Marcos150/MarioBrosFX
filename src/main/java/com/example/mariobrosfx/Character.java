@@ -5,6 +5,9 @@ import javafx.scene.image.Image;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Class that defines the playable character
+ */
 public class Character extends AnimatedSprite
 {
     private int currentGravity;
@@ -23,6 +26,9 @@ public class Character extends AnimatedSprite
     private boolean canFall;
     private boolean canJump;
 
+    /**
+     * Constructor of character class
+     */
     public Character()
     {
         super(CHARACTER_WIDTH, CHARACTER_HEIGHT);
@@ -55,6 +61,10 @@ public class Character extends AnimatedSprite
         spriteY = 1;
     }
 
+    /**
+     * Method that moves the player to left or right
+     * @param movement Direction where the character is going to move
+     */
     public void move(int movement)
     {
         int newX = x;
@@ -116,6 +126,9 @@ public class Character extends AnimatedSprite
         moveTo(newX, y);
     }
 
+    /**
+     * Method that changes the character sprite to a still one
+     */
     public void setStillSprite()
     {
         spriteX = 0;
@@ -142,16 +155,22 @@ public class Character extends AnimatedSprite
         }
     }
 
+    /**
+     * Method that makes the character jump
+     */
     public void jump()
     {
         if (canJump)
         {
             y--;
-            currentGravity = Configuration.JUMP_FORCE;
+            currentGravity = Configuration.JUMP_STRENGTH;
             canJump = false;
         }
     }
 
+    /**
+     * Method that manages the character gravity
+     */
     public void checkGravity()
     {
         //Moves vertically if it's not in a platform
@@ -164,15 +183,20 @@ public class Character extends AnimatedSprite
             currentGravity += Configuration.GRAVITY;
     }
 
-    public void checkCollisionType(Platform p)
+    /**
+     * Method that checks the type of collision between platforms
+     * and the character
+     * @param platform Platform the character has collided with
+     */
+    public void checkCollisionType(Platform platform)
     {
         //If collides from above
-        if (y < p.y)
+        if (y < platform.y)
         {
             this.canJump = true;
-            this.currentPlatform = p;
+            this.currentPlatform = platform;
             //This probably will have to be adjusted
-            this.y = p.y - 31;
+            this.y = platform.y - 31;
             this.currentGravity = 0;
             if (this.right || this.left)
             {
@@ -193,16 +217,28 @@ public class Character extends AnimatedSprite
         }
     }
 
+    /**
+     * Method that changes the canFall parameter
+     * @param canFall New value
+     */
     public void setCanFall(boolean canFall)
     {
         this.canFall = canFall;
     }
 
+    /**
+     * Method that returns the platform where the character is standing
+     * @return Platform where the character is standing
+     */
     public Platform getCurrentPlatform()
     {
         return currentPlatform;
     }
 
+    /**
+     * Method that changes the currentPlatform parameter
+     * @param currentPlatform New platform
+     */
     public void setCurrentPlatform(Platform currentPlatform)
     {
         this.currentPlatform = currentPlatform;

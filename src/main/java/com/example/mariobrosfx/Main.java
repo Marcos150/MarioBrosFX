@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Main class that initializes the game
+ */
 public class Main extends Application
 {
     private Scene scene;

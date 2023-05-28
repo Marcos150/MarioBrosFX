@@ -17,6 +17,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Class that manages all the game mechanics and menus
+ */
 public class Game
 {
     @FXML
@@ -56,6 +59,9 @@ public class Game
         }
     };
 
+    /**
+     * Constructor of the game class
+     */
     public Game()
     {
         File file = new File("ranking.dat");
@@ -69,7 +75,10 @@ public class Game
         canvas = new Canvas();
     }
 
-    public void lblMouseClick()
+    /**
+     * Method that starts the game when the start label is clicked
+     */
+    public void start()
     {
         activeKeys = new HashSet<>();
         releasedKeys = new HashSet<>();
@@ -99,6 +108,9 @@ public class Game
         tm.start();
     }
 
+    /**
+     * Method that draws all the drawable elements
+     */
     public void draw()
     {
         checkCollision();
@@ -114,6 +126,9 @@ public class Game
         checkCoinsAndWin();
     }
 
+    /**
+     * Method that checks if any keys have been hit
+     */
     public void manageKeys()
     {
         if (activeKeys.contains(KeyCode.LEFT) && !activeKeys.contains(KeyCode.RIGHT))
@@ -126,6 +141,10 @@ public class Game
             player.jump();
     }
 
+    /**
+     * Method that checks which coins have been collected and checks if
+     * the game has to finish
+     */
     public void checkCoinsAndWin()
     {
         boolean win = true;
@@ -141,6 +160,9 @@ public class Game
             gameOver();
     }
 
+    /**
+     * Method that places all the platforms according to the map.txt file
+     */
     public void generatePlatforms()
     {
         int counter = 0;
@@ -172,6 +194,9 @@ public class Game
         }
     }
 
+    /**
+     * Method that places all the coins according to the coins.txt file
+     */
     public void generateCoins()
     {
         coins = new ArrayList<>();
@@ -206,6 +231,10 @@ public class Game
         }
     }
 
+    /**
+     * Method that checks the collision between the player
+     * and the rest of the elements
+     */
     public void checkCollision()
     {
         //Platforms
@@ -241,11 +270,17 @@ public class Game
         }
     }
 
+    /**
+     * Method that updates the HUD
+     */
     public void updateHUD()
     {
         lblTime.setText("Time: " + time);
     }
 
+    /**
+     * Method that shows the game over screen when the game finishes
+     */
     public void gameOver()
     {
         tm.stop();
@@ -264,6 +299,9 @@ public class Game
         listRanking.getItems().setAll(ranking);
     }
 
+    /**
+     * Method that adds a new register to the ranking
+     */
     public void addRanking()
     {
         RankingRegister register = new RankingRegister(time, txtFieldName.getText());

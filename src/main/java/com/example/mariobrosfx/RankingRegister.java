@@ -5,12 +5,29 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Class that defines a Ranking register and manages the ranking data
+ */
 public class RankingRegister implements Serializable
 {
+    /**
+     * Quantity of time the player spent to beat the game
+     */
     private int time;
+    /**
+     * Name of the player
+     */
     private String name;
+    /**
+     * Date and time of the game
+     */
     private LocalDateTime date;
 
+    /**
+     * Constructor with parameters
+     * @param time Final time made in the game
+     * @param name name of the player of the game
+     */
     public RankingRegister(int time, String name)
     {
         this.time = time;
@@ -18,6 +35,10 @@ public class RankingRegister implements Serializable
         this.date = LocalDateTime.now();
     }
 
+    /**
+     * Method that saves the ranking into a serialized file
+     * @param ranking list containing the ranking
+     */
     public static void saveData(List<RankingRegister> ranking)
     {
         try(ObjectOutputStream oos =
@@ -31,6 +52,10 @@ public class RankingRegister implements Serializable
         }
     }
 
+    /**
+     * Method that loads the raking from the serialized file
+     * @return A list with the deserialized ranking
+     */
     public static List<RankingRegister> loadRanking()
     {
         List<RankingRegister> ranking = null;
@@ -46,11 +71,19 @@ public class RankingRegister implements Serializable
         return ranking;
     }
 
+    /**
+     * Returns the register time
+     * @return Register time
+     */
     public int getTime()
     {
         return time;
     }
 
+    /**
+     * Returns formated ranking register
+     * @return Ranking register
+     */
     @Override
     public String toString()
     {

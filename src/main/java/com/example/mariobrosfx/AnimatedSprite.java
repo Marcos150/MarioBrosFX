@@ -1,12 +1,10 @@
 package com.example.mariobrosfx;
 
+/**
+ * Abstract class that defines all the elements with animated sprites
+ */
 public abstract class AnimatedSprite extends Sprite
 {
-    public int HEIGHT;
-    public int WIDTH;
-    public static final int LEFT = 0;
-    public static final int RIGHT = 1;
-    protected String SPRITE_FILE;
     protected int totalMovements;
     protected int currentMovement;
     protected int currentSprite;
@@ -16,11 +14,20 @@ public abstract class AnimatedSprite extends Sprite
     protected boolean left;
     protected boolean right;
 
+    /**
+     * Constructor of AnimatedSprite class
+     * @param width element width
+     * @param height element height
+     */
     public AnimatedSprite(int width, int height)
     {
         super(width, height);
     }
 
+    /**
+     * Method that animates the element
+     * @param movement direction of the movement
+     */
     public void animate(int movement)
     {
         if (movement != currentMovement)
@@ -43,6 +50,9 @@ public abstract class AnimatedSprite extends Sprite
         updateSpriteCoordinates();
     }
 
+    /**
+     * Method that updates the current sprite when animating
+     */
     protected void updateSpriteCoordinates()
     {
         spriteX = coordinatesX[currentMovement][currentSprite];
