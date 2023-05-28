@@ -7,8 +7,6 @@ import java.nio.file.Paths;
 
 public class Character extends AnimatedSprite
 {
-    private int lives;
-    private int points;
     private int currentGravity;
     public static final int CHARACTER_WIDTH = 16;
     public static final int CHARACTER_HEIGHT = 32;
@@ -48,10 +46,8 @@ public class Character extends AnimatedSprite
         coordinatesY[LEFT] = new int[] { 0, 0, 0, 0, 0 };
         totalMovements = 5;
 
-        lives = Configuration.INITIAL_LIVES;
         canJump = true;
         currentGravity = 0;
-        points = 0;
         currentPlatform = null;
         lastDirection = RIGHT;
 
@@ -168,12 +164,7 @@ public class Character extends AnimatedSprite
             currentGravity += Configuration.GRAVITY;
     }
 
-    public void respawn()
-    {
-
-    }
-
-    public int checkCollisionType(Platform p)
+    public void checkCollisionType(Platform p)
     {
         //If collides from above
         if (y < p.y)
@@ -194,24 +185,12 @@ public class Character extends AnimatedSprite
                     e.printStackTrace();
                 }
             }
-            return 0;
         }
         //If collides from below
         else
         {
             canFall = false;
-            return 1;
         }
-    }
-
-    public void setPoints(int points)
-    {
-        this.points = points;
-    }
-
-    public int getPoints()
-    {
-        return points;
     }
 
     public void setCanFall(boolean canFall)

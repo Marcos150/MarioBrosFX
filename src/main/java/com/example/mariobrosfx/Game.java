@@ -1,7 +1,6 @@
 package com.example.mariobrosfx;
 
 import javafx.animation.AnimationTimer;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -29,10 +28,6 @@ public class Game
     @FXML
     private Label lblTime;
     @FXML
-    private Label lblPoints;
-    @FXML
-    private Label lblOnPlatform;
-    @FXML
     private Label lblplayer;
     @FXML
     private Canvas canvas;
@@ -42,7 +37,6 @@ public class Game
     private Character player;
     private List<Coin> coins;
     private Platform[] platforms;
-    private boolean secret;
     private List<RankingRegister> ranking;
     private Set<KeyCode> activeKeys;
     private Set<KeyCode> releasedKeys;
@@ -77,15 +71,11 @@ public class Game
 
     public void lblMouseClick()
     {
-        activeKeys = new HashSet<KeyCode>();
-        releasedKeys = new HashSet<KeyCode>();
-        activeKeys.clear();
+        activeKeys = new HashSet<>();
+        releasedKeys = new HashSet<>();
         canvas.setWidth(Configuration.SCREEN_WIDTH);
         canvas.setHeight(Configuration.SCREEN_HEIGHT);
         gc = canvas.getGraphicsContext2D();
-        lblGame.setTextFill(Color.WHITE);
-        lblplayer.setTextFill(Color.WHITE);
-        lblGame.setText("Refresh map");
         gc.setFill(Color.BLACK);
 
         player = new Character();
@@ -103,24 +93,16 @@ public class Game
         buttonAddRanking.setVisible(false);
         listRanking.setVisible(false);
         txtFieldName.setVisible(false);
+        lblGame.setVisible(false);
+        lblTime.setVisible(true);
         time = 0;
         tm.start();
-    }
-
-    //Method for testing, will be removed later
-    public void lblPlayerMouseClick()
-    {
-        for (Coin c : coins)
-        {
-            c.setCollected(true);
-        }
     }
 
     public void draw()
     {
         checkCollision();
         player.checkGravity();
-        drawDebug();
         manageKeys();
         gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
         for (Platform platform : platforms)
@@ -130,12 +112,6 @@ public class Game
         player.draw(gc);
         updateHUD();
         checkCoinsAndWin();
-    }
-
-    public void drawDebug()
-    {
-        lblplayer.setText(player.getX() + " " + player.getY());
-        lblOnPlatform.setText("Current platform= " + player.getCurrentPlatform());
     }
 
     public void manageKeys()
@@ -161,7 +137,7 @@ public class Game
                 win = false;
             }
         }
-        if (win && lblGame.getText().equals("Refresh map")) //If game has started
+        if (win && lblTime.visibleProperty().get()) //If game has started
             gameOver();
     }
 
@@ -261,23 +237,21 @@ public class Game
         for (Coin c : coins)
         {
             if (player.collidesWith(c) && !c.isCollected())
-            {
                 c.setCollected(true);
-                player.setPoints(player.getPoints() + Configuration.COIN_POINTS);
-            }
         }
     }
 
     public void updateHUD()
     {
-        lblPoints.setText("Points: " + player.getPoints());
         lblTime.setText("Time: " + time);
     }
 
     public void gameOver()
     {
         tm.stop();
+        lblGame.setVisible(true);
         lblGame.setTextFill(Color.BLACK);
+        lblplayer.setVisible(true);
         lblplayer.setTextFill(Color.BLACK);
         lblplayer.setText("Final time: " + time);
         lblGame.setText("Play again");
@@ -286,6 +260,8 @@ public class Game
         listRanking.setVisible(true);
         txtFieldName.setVisible(true);
         buttonAddRanking.setVisible(true);
+        ranking.sort(Comparator.comparingInt(RankingRegister::getTime));
+        listRanking.getItems().setAll(ranking);
     }
 
     public void addRanking()

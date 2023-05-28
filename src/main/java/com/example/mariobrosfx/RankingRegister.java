@@ -3,7 +3,6 @@ package com.example.mariobrosfx;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.List;
 
 public class RankingRegister implements Serializable
@@ -50,11 +49,6 @@ public class RankingRegister implements Serializable
     public int getTime()
     {
         return time;
-    }
-
-    public int compare(RankingRegister r1, RankingRegister r2)
-    {
-        return Integer.compare(r1.time, r2.time);
     }
 
     @Override

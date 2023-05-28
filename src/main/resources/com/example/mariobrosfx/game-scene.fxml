@@ -13,10 +13,8 @@
       <children>
          <Canvas fx:id="canvas" disable="true" height="618.0" width="548.0" />
          <Label fx:id="lblGame" layoutX="299.0" layoutY="206.0" onMouseClicked="#lblMouseClick" text="Start" />
-         <Label fx:id="lblOnPlatform" layoutX="297.0" layoutY="142.0" text="Label" textFill="WHITE" />
-         <Label fx:id="lblplayer" layoutX="297.0" layoutY="174.0" onMouseClicked="#lblPlayerMouseClick" text="Label" textFill="WHITE" />
-         <Label fx:id="lblPoints" layoutX="14.0" layoutY="14.0" text="Label" textFill="WHITE" />
-         <Label fx:id="lblTime" layoutX="504.0" layoutY="14.0" text="Label" textFill="WHITE" />
+         <Label fx:id="lblplayer" layoutX="297.0" layoutY="174.0" text="Label" textFill="WHITE" visible="false" />
+         <Label fx:id="lblTime" layoutX="14.0" layoutY="14.0" text="Label" textFill="WHITE" visible="false" />
          <ListView fx:id="listRanking" layoutX="212.0" layoutY="359.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
          <TextField fx:id="txtFieldName" layoutX="232.0" layoutY="283.0" promptText="Escribe tu nombre..." visible="false" />
          <Button fx:id="buttonAddRanking" layoutX="263.0" layoutY="324.0" mnemonicParsing="false" onMouseClicked="#addRanking" text="Añadir registro" visible="false" />
