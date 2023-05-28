@@ -13,7 +13,8 @@ public class Platform extends Sprite
     public static final int PLATFORM_WIDTH = 128;
     public static final int PLATFORM_HEIGHT = 16;
 
-    private static final String IMAGE_PATH = "src/main/resources/com/example/mariobrosfx/sprites/platforms_sprite.png";
+    private static final String IMAGE_PATH = "src/main/resources/com/example/" +
+            "mariobrosfx/sprites/platforms_sprite.png";
 
     /**
      * Constructor of platform class

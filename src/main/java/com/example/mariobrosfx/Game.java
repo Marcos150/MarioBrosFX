@@ -116,7 +116,8 @@ public class Game
         checkCollision();
         player.checkGravity();
         manageKeys();
-        gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
+        gc.fillRect(0, 0, Configuration.SCREEN_WIDTH,
+                Configuration.SCREEN_HEIGHT);
         for (Platform platform : platforms)
         {
             platform.draw(gc);
@@ -131,9 +132,11 @@ public class Game
      */
     public void manageKeys()
     {
-        if (activeKeys.contains(KeyCode.LEFT) && !activeKeys.contains(KeyCode.RIGHT))
+        if (activeKeys.contains(KeyCode.LEFT) &&
+                !activeKeys.contains(KeyCode.RIGHT))
             player.move(Character.LEFT);
-        else if (activeKeys.contains(KeyCode.RIGHT) && !activeKeys.contains(KeyCode.LEFT))
+        else if (activeKeys.contains(KeyCode.RIGHT) &&
+                !activeKeys.contains(KeyCode.LEFT))
             player.move(Character.RIGHT);
         else
             player.setStillSprite();
@@ -168,7 +171,8 @@ public class Game
         int counter = 0;
         try
         {
-            File mapFile = new File("src/main/resources/com/example/mariobrosfx/map.txt");
+            File mapFile = new File("src/main/resources/com/example/" +
+                    "mariobrosfx/map.txt");
             Scanner myReader = new Scanner(mapFile);
             int y = 0;
             while (myReader.hasNextLine())
@@ -184,7 +188,8 @@ public class Game
                     }
                     x += 128;
                 }
-                y += Configuration.SCREEN_HEIGHT/Configuration.MAP_ROWS - 1; //-1 so that the last line is barely visible
+                //-1 so that the last line is barely visible
+                y += Configuration.SCREEN_HEIGHT/Configuration.MAP_ROWS - 1;
             }
             myReader.close();
         }
@@ -202,7 +207,8 @@ public class Game
         coins = new ArrayList<>();
         try
         {
-            File coinFile = new File("src/main/resources/com/example/mariobrosfx/coins.txt");
+            File coinFile = new File("src/main/resources/com/example/" +
+                    "mariobrosfx/coins.txt");
             Scanner myReader = new Scanner(coinFile);
             int y = 40;
 
@@ -291,7 +297,8 @@ public class Game
         lblplayer.setText("Final time: " + time);
         lblGame.setText("Play again");
         gc.setFill(Color.WHITE);
-        gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
+        gc.fillRect(0, 0, Configuration.SCREEN_WIDTH,
+                Configuration.SCREEN_HEIGHT);
         listRanking.setVisible(true);
         txtFieldName.setVisible(true);
         buttonAddRanking.setVisible(true);
@@ -304,7 +311,8 @@ public class Game
      */
     public void addRanking()
     {
-        RankingRegister register = new RankingRegister(time, txtFieldName.getText());
+        RankingRegister register = new RankingRegister(time,
+                txtFieldName.getText());
         ranking.add(register);
         RankingRegister.saveData(ranking);
         ranking.sort(Comparator.comparingInt(RankingRegister::getTime));

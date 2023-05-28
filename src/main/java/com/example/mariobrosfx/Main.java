@@ -16,7 +16,8 @@ public class Main extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game-scene.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(
+                "game-scene.fxml"));
         scene = fxmlLoader.load();
         stage.setTitle("Mario Bros");
         stage.setScene(scene);

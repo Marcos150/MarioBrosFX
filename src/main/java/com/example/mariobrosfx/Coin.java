@@ -11,7 +11,8 @@ import java.nio.file.Paths;
  */
 public class Coin extends Sprite
 {
-    private static final String IMAGE_PATH = "src/main/resources/com/example/mariobrosfx/sprites/sprites.png";
+    private static final String IMAGE_PATH = "src/main/resources/com/example/" +
+            "mariobrosfx/sprites/sprites.png";
     private boolean collected;
 
     /**

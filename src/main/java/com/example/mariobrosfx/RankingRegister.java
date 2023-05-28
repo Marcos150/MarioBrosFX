@@ -60,7 +60,8 @@ public class RankingRegister implements Serializable
     {
         List<RankingRegister> ranking = null;
         try(ObjectInputStream ois =
-                    new ObjectInputStream(new FileInputStream("ranking.dat")))
+                    new ObjectInputStream(new FileInputStream(
+                            "ranking.dat")))
         {
             ranking = (List<RankingRegister>) ois.readObject();
         }
@@ -87,7 +88,8 @@ public class RankingRegister implements Serializable
     @Override
     public String toString()
     {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern(
+                "dd MMMM yyyy HH:mm");
         String strDate = format.format(date);
         return time + "  " + name + "  " + strDate;
     }

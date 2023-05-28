@@ -13,7 +13,8 @@ public class Character extends AnimatedSprite
     private int currentGravity;
     public static final int CHARACTER_WIDTH = 16;
     public static final int CHARACTER_HEIGHT = 32;
-    private static final String IMAGE_PATH = "src/main/resources/com/example/mariobrosfx/sprites/spritesAndar.png";
+    private static final String IMAGE_PATH = "src/main/resources/com/example/" +
+            "mariobrosfx/sprites/spritesAndar.png";
     private String spriteJumpLeft;
     private String spriteJumpRight;
     private String spriteStillLeft;
@@ -40,10 +41,14 @@ public class Character extends AnimatedSprite
             e.printStackTrace();
         }
 
-        spriteJumpLeft = "src/main/resources/com/example/mariobrosfx/sprites/spriteSaltoIzquierda.png";
-        spriteJumpRight = "src/main/resources/com/example/mariobrosfx/sprites/spriteSaltoDerecha.png";
-        spriteStillLeft = "src/main/resources/com/example/mariobrosfx/sprites/spriteQuietoIzquierda.png";
-        spriteStillRight = "src/main/resources/com/example/mariobrosfx/sprites/spriteQuietoDerecha.png";
+        spriteJumpLeft = "src/main/resources/com/example/mariobrosfx/sprites/" +
+                "spriteSaltoIzquierda.png";
+        spriteJumpRight = "src/main/resources/com/example/mariobrosfx/sprites/" +
+                "spriteSaltoDerecha.png";
+        spriteStillLeft = "src/main/resources/com/example/mariobrosfx/sprites/" +
+                "spriteQuietoIzquierda.png";
+        spriteStillRight = "src/main/resources/com/example/mariobrosfx/sprites/" +
+                "spriteQuietoDerecha.png";
         coordinatesX = new int[2][totalMovements];
         coordinatesY = new int[2][totalMovements];
         coordinatesX[RIGHT] = Configuration.CHARACTER_ANIMATION_RIGHT;
@@ -97,7 +102,8 @@ public class Character extends AnimatedSprite
             {
                 try
                 {
-                    image = new Image(Files.newInputStream(Paths.get(spriteJumpLeft)));
+                    image = new Image(Files.newInputStream(Paths.get(
+                            spriteJumpLeft)));
                 } catch (Exception e)
                 {
                     e.printStackTrace();
@@ -116,7 +122,8 @@ public class Character extends AnimatedSprite
             {
                 try
                 {
-                    image = new Image(Files.newInputStream(Paths.get(spriteJumpRight)));
+                    image = new Image(Files.newInputStream(Paths.get(
+                            spriteJumpRight)));
                 } catch (Exception e)
                 {
                     e.printStackTrace();
@@ -137,7 +144,8 @@ public class Character extends AnimatedSprite
         {
             try
             {
-                image = new Image(Files.newInputStream(Paths.get(spriteStillLeft)));
+                image = new Image(Files.newInputStream(Paths.get(
+                        spriteStillLeft)));
             } catch (Exception e)
             {
                 e.printStackTrace();
@@ -147,7 +155,8 @@ public class Character extends AnimatedSprite
         {
             try
             {
-                image = new Image(Files.newInputStream(Paths.get(spriteStillRight)));
+                image = new Image(Files.newInputStream(Paths.get(
+                        spriteStillRight)));
             } catch (Exception e)
             {
                 e.printStackTrace();
@@ -179,7 +188,8 @@ public class Character extends AnimatedSprite
             this.moveTo(this.x, this.y + this.currentGravity);
         //Increases gravity if it has not at the maximum gravity
         //and is not in a platform
-        if (this.currentGravity < Configuration.MAX_GRAVITY && currentPlatform == null)
+        if (this.currentGravity < Configuration.MAX_GRAVITY && currentPlatform
+                == null)
             currentGravity += Configuration.GRAVITY;
     }
 
@@ -202,7 +212,8 @@ public class Character extends AnimatedSprite
             {
                 try
                 {
-                    image = new Image(Files.newInputStream(Paths.get(IMAGE_PATH)));
+                    image = new Image(Files.newInputStream(Paths.get(
+                            IMAGE_PATH)));
                 }
                 catch (Exception e)
                 {
